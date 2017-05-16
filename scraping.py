@@ -19,7 +19,6 @@ for item in lawyers_data:
     lawyer_name= item.find_all("span",{"itemprop":"name"})[0]
     lawyer_name=lawyer_name.get_text(strip=True)
     print lawyer_name
-    
     lawyer_address= item.find_all("span",{"itemprop":"addressLocality"})[0]
     lawyer_address=lawyer_address.get_text(strip=True)
     print lawyer_address
