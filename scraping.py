@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 
 lawyers_list=[]
 
-for i in range(421):  
+for i in range(1,421):  
     url="http://lawrato.com/lawyers?&page={}".format(i)
     r = requests.get(url)
 
