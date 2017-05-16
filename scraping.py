@@ -2,32 +2,30 @@ import requests
 import csv
 from bs4 import BeautifulSoup
 
-url="http://lawrato.com/lawyers"
-r = requests.get(url)
-
-
 lawyers_list=[]
 
+for i in range(421):  
+    url="http://lawrato.com/lawyers?&page={}".format(i)
+    r = requests.get(url)
 
-soup=BeautifulSoup(r.content,"html.parser")
+
+    soup=BeautifulSoup(r.content,"html.parser")
 
 
-lawyers_data = soup.find_all("div",{"class":"col-lg-7 col-xs-7 pad-lt-rt"})
-for item in lawyers_data:
-    
-    
-    lawyer_name= item.find_all("span",{"itemprop":"name"})[0]
-    lawyer_name=lawyer_name.get_text(strip=True)
-    print lawyer_name
-    lawyer_address= item.find_all("span",{"itemprop":"addressLocality"})[0]
-    lawyer_address=lawyer_address.get_text(strip=True)
-    print lawyer_address
-    lawyer_experience= item.find_all("p",{"itemscope":""})[1]
-    lawyer_experience=lawyer_experience.get_text(strip=True)
-    print lawyer_experience
-    lawyers= [lawyer_name,lawyer_address,lawyer_experience]
-    lawyers_list.append(lawyers)
-    print ""
+    lawyers_data = soup.find_all("div",{"class":"col-lg-7 col-xs-7 pad-lt-rt"})
+    for item in lawyers_data:
+        lawyer_name= item.find_all("span",{"itemprop":"name"})[0]
+        lawyer_name=lawyer_name.get_text(strip=True)
+        print lawyer_name
+        lawyer_address= item.find_all("span",{"itemprop":"addressLocality"})[0]
+        lawyer_address=lawyer_address.get_text(strip=True)
+        print lawyer_address
+        lawyer_experience= item.find_all("p",{"itemscope":""})[1]
+        lawyer_experience=lawyer_experience.get_text(strip=True)
+        print lawyer_experience
+        lawyers= [lawyer_name,lawyer_address,lawyer_experience]
+        lawyers_list.append(lawyers)
+        print ""
    
    
 with open("lawyers.csv", "w") as toWrite:
